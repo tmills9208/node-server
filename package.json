@@ -1,0 +1,26 @@
+{
+  "name": "node-server",
+  "version": "1.0.0",
+  "description": "A node server to try and follow through guides, to make a running and tested solution",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "build": "echo \"build not implemented\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "webapp",
+    "backend",
+    "node.js server"
+  ],
+  "author": "tmills9208",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mysql": "^2.18.1"
+  }
+}
