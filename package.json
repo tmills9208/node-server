@@ -1,12 +1,12 @@
 {
   "name": "node-server",
   "version": "1.0.0",
-  "description": "A node server to try and follow through guides, to make a running and tested solution",
+  "description": "A node server to try and follow through guides, to make a running and tested solution. Also making my own reusable submodules for later purposes.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
     "build": "echo \"build not implemented\" && exit 1",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "node.js",
@@ -15,9 +15,19 @@
     "node.js server"
   ],
   "author": "tmills9208",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tmills9208/node-server.git"
+  },
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "@types/jest": "^27.4.1",
+    "@types/mysql": "^2.15.21",
+    "@types/node": "^17.0.24",
+    "nodemon": "^2.0.15",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
   },
   "dependencies": {
     "dotenv": "^16.0.0",

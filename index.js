@@ -2,35 +2,38 @@ require('dotenv').config();
 const http = require('http');
 const mysql = require('mysql2');
 
-const host = process.env.HOST;
-const port = process.env.PORT;
+const models = require('./src/models');
 
-const sqlHost = process.env.MYSQL_HOST;
-const sqlPort = process.env.MYSQL_PORT;
-const sqlUser = process.env.MYSQL_USER;
-const sqlPass = process.env.MYSQL_PASS;
+const envServer = models.envServer;
+const envMySql = models.envMySql;
 
 const dbConnection = mysql.createConnection({
-  host: sqlHost,
-  port: sqlPort,
-  user: sqlUser,
-  password: sqlPass
-})
+  host: envMySql.host,
+  port: envMySql.port,
+  user: envMySql.user,
+  password: envMySql.password
+});
 
 // failed at first, needed to replace package: mysql -> mysql2
-// explanation of why here: https://stackoverflow.com/a/56509065
+// explanation: https://stackoverflow.com/a/56509065
 dbConnection.connect(function(err) {
   if (err) throw err;
   console.log("MySQL Connection successful!");
-})
+});
 
-const requestListener = function(req, res) {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text-plain');
-  res.end('Hello World!\n');
-};
+const requestListener = (async (req, res) => {
+  if (req.url === "/api" && req.method == "GET") {
+    res.writeHead(200, { 'Content-Type': 'application/json'});
+    res.write('Hello! Welcome to the \'purely\' Node.js API!\n');
+    res.end();
+  }
+  else {
+    res.writeHead(404, { 'Content-Type': 'application/json'});
+    res.end(JSON.stringify({ message: "Route not found" }));
+  }
+});
 
 const server = http.createServer(requestListener);
-server.listen(8080);
-
-console.log(`Node.js server running on: ${host}:${port}`);
+server.listen(envServer.port, () => {
+  console.log(`Node.js server running on: ${envServer.host}:${envServer.port}`);
+});
